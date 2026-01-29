@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dkftnmo05j8ap"]
+[gd_scene load_steps=6 format=3 uid="uid://dkftnmo05j8ap"]
 
 [ext_resource type="PackedScene" uid="uid://ct2ra7hd6fbr7" path="res://Entities/player.tscn" id="1_a526m"]
+[ext_resource type="Material" uid="uid://b6dviv26cgjo6" path="res://Assets/ground/Ground078_1K-JPG.tres" id="2_r3cbp"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_a526m"]
 size = Vector2(20, 20)
@@ -14,6 +15,7 @@ size = Vector2(20, 20)
 [node name="Player" parent="." instance=ExtResource("1_a526m")]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_overlay = ExtResource("2_r3cbp")
 mesh = SubResource("PlaneMesh_a526m")
 skeleton = NodePath("StaticBody3D")
 
@@ -23,3 +25,6 @@ physics_material_override = SubResource("PhysicsMaterial_a526m")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
 shape = SubResource("WorldBoundaryShape3D_a526m")
 debug_color = Color(3.08037e-06, 0.601612, 0.690619, 0.42)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.456477, 0.889735, 0, -0.889735, 0.456477, 0, 14.3925, 12.6909)
