@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://dkftnmo05j8ap"]
+
+[ext_resource type="PackedScene" uid="uid://ct2ra7hd6fbr7" path="res://Entities/player.tscn" id="1_a526m"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_a526m"]
+size = Vector2(20, 20)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_a526m"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_a526m"]
+
+[node name="Level" type="Node3D"]
+
+[node name="Player" parent="." instance=ExtResource("1_a526m")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_a526m")
+skeleton = NodePath("StaticBody3D")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+physics_material_override = SubResource("PhysicsMaterial_a526m")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("WorldBoundaryShape3D_a526m")
+debug_color = Color(3.08037e-06, 0.601612, 0.690619, 0.42)
