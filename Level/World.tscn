@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://db2h3t17k37pe"]
+[gd_scene load_steps=10 format=3 uid="uid://db2h3t17k37pe"]
 
-[ext_resource type="Material" uid="uid://b4s0xnt1f6lia" path="res://Assets/Materials/Green.tres" id="1_o5nrg"]
 [ext_resource type="Material" uid="uid://bi1h4xe7msjwi" path="res://Assets/Materials/Pink.tres" id="3_irgfk"]
+[ext_resource type="Material" uid="uid://b4s0xnt1f6lia" path="res://Assets/Materials/Green.tres" id="4_0obbo"]
 [ext_resource type="Material" uid="uid://b122sws3pt7w7" path="res://Assets/Materials/Red.tres" id="4_nuwel"]
-[ext_resource type="Script" uid="uid://cbuhjfwpxlocm" path="res://Entities/player.gd" id="5_0obbo"]
+[ext_resource type="PackedScene" uid="uid://ct2ra7hd6fbr7" path="res://Entities/Player.tscn" id="5_0obbo"]
 [ext_resource type="Material" uid="uid://p2nkjd3ge3qm" path="res://Assets/Materials/Blue.tres" id="5_te4rd"]
+[ext_resource type="PackedScene" uid="uid://den388qr5y12s" path="res://Level/Level.tscn" id="6_svajd"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5lq0h"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -18,10 +19,6 @@ background_mode = 2
 sky = SubResource("Sky_f6bkd")
 tonemap_mode = 2
 glow_enabled = true
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_xc2g5"]
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wydro"]
 
 [node name="World" type="Node3D"]
 
@@ -70,7 +67,7 @@ use_collision = true
 size = Vector3(4, 8, 4)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Map"]
-material_override = ExtResource("1_o5nrg")
+material_override = ExtResource("4_0obbo")
 use_collision = true
 size = Vector3(52.2363, 0.002, 59.575)
 
@@ -81,18 +78,6 @@ environment = SubResource("Environment_g2h84")
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 shadow_enabled = true
 
-[node name="Player" type="CharacterBody3D" parent="."]
-script = ExtResource("5_0obbo")
+[node name="Player" parent="." instance=ExtResource("5_0obbo")]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("CapsuleMesh_xc2g5")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("CapsuleShape3D_wydro")
-
-[node name="Head" type="Node3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.67939, 0)
-
-[node name="Camera3D" type="Camera3D" parent="Player/Head"]
+[node name="Level" parent="." instance=ExtResource("6_svajd")]

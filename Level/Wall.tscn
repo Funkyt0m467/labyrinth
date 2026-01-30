@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://diagpys03xl1f"]
+
+[ext_resource type="Material" uid="uid://p2nkjd3ge3qm" path="res://Assets/Materials/Blue.tres" id="1_15go4"]
+
+[node name="Wall" type="Node3D"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+material_override = ExtResource("1_15go4")
+use_collision = true
+size = Vector3(10, 4, 10)
