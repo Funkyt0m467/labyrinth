@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://diagpys03xl1f"]
+[gd_scene load_steps=7 format=3 uid="uid://diagpys03xl1f"]
 
 [ext_resource type="Texture2D" uid="uid://dordul342wk1m" path="res://Assets/StoneWall/rock_wall_08_diff_1k.jpg" id="1_15go4"]
 [ext_resource type="Texture2D" uid="uid://ebjqihrrausk" path="res://Assets/StoneWall/rock_wall_08_rough_1k.exr" id="2_eo1xn"]
@@ -13,10 +13,17 @@ uv1_scale = Vector3(2.32, 2.32, 2.32)
 
 [sub_resource type="BoxMesh" id="BoxMesh_3c75l"]
 material = SubResource("StandardMaterial3D_rmvkh")
+size = Vector3(5, 6, 5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rmvkh"]
 size = Vector3(5, 5, 5)
 
-[node name="Wall" type="Node3D"]
+[node name="Wall" type="StaticBody3D"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 mesh = SubResource("BoxMesh_3c75l")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+shape = SubResource("BoxShape3D_rmvkh")

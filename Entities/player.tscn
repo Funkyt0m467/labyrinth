@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://ct2ra7hd6fbr7"]
+[gd_scene load_steps=4 format=3 uid="uid://ct2ra7hd6fbr7"]
 
 [ext_resource type="Script" uid="uid://dogtnb8j3fgiw" path="res://Entities/player.gd" id="1_tcnsb"]
+[ext_resource type="Script" uid="uid://nasx76nqy6gq" path="res://Assets/TorchLight.gd" id="2_1iada"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gb1tc"]
 
@@ -20,7 +21,10 @@ current = true
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
-light_color = Color(0.718146, 0.438267, 0.265445, 1)
-light_energy = 10.0
+light_color = Color(0.69, 0.42987, 0.2898, 1)
+light_energy = 5.0
 shadow_enabled = true
-omni_range = 15.0
+omni_attenuation = 1.6
+script = ExtResource("2_1iada")
+range_variation = 15.0
+energy_variation = 15.0

@@ -17,7 +17,7 @@ func _ready():
 		height+=1
 	
 	_generate_grid()
-	print_grid()
+	#print_grid()
 	
 	_generate_level()
 
@@ -34,7 +34,7 @@ func print_grid():
 
 func _generate_grid():
 	_init_grid()
-	_carve(Vector2i((width-1)/2, height-2))
+	_carve(Vector2i((width-1)>>1, height-2))
 	_create_entry_and_exit()
 
 func _init_grid():
@@ -66,7 +66,7 @@ func _carve(cell: Vector2i):
 			_carve(next)
 
 func _create_entry_and_exit():
-	var mid_x: int = (width-1)/2
+	var mid_x: int = (width-1)>>1
 	grid[height-1][mid_x] = false #Entry
 	grid[0][mid_x] = false #Exit
 
@@ -84,4 +84,4 @@ func _generate_wall(x:int, z:int):
 	add_child(wall)
 	
 	wall.global_position.x = x * wall.get_child(0).mesh.size.x
-	wall.global_position.z = (z-(width-1)/2) * wall.get_child(0).mesh.size.z
+	wall.global_position.z = (z-((width-1)>>1)) * wall.get_child(0).mesh.size.z
