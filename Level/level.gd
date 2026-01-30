@@ -1,9 +1,12 @@
 extends Node3D
 
-var width: int = 30
-var height: int = 30
+const WALL := preload("res://Level/Wall.tscn")
 
-var grid: Array = [] #2D grid of bools
+var width: int = 19
+var height: int = width
+
+var grid: Array = [] #2D grid of bools, wall = true, path = false
+var walls: Array[CSGBox3D] = [] #Array of boxes for each wall section
 
 func _ready():
 	
@@ -13,11 +16,10 @@ func _ready():
 	if height%2 == 0:
 		height+=1
 	
-	_init_grid()
-	_carve(Vector2i(width/2, height-2))
-	_create_entry_and_exit()
+	_generate_grid()
+	print_grid()
 	
-	#print_grid()
+	_generate_level()
 
 #Debug fonction to check how the var grid looks like
 func print_grid():
@@ -29,6 +31,11 @@ func print_grid():
 		output += "\n"
 
 	print(output)
+
+func _generate_grid():
+	_init_grid()
+	_carve(Vector2i((width-1)/2, height-2))
+	_create_entry_and_exit()
 
 func _init_grid():
 	grid.clear()
@@ -52,16 +59,29 @@ func _carve(cell: Vector2i):
 
 	for dir:Vector2i in directions:
 		var next:Vector2i = cell + dir
-		if _in_bounds(next) and grid[next.y][next.x]:
+		if next.x > 0 and next.x < width-1 and next.y > 0 and next.y < height-1 and grid[next.y][next.x]:
 			#Carve the wall between
 			var between:Vector2i = cell + dir/2
 			grid[between.y][between.x] = false
 			_carve(next)
 
 func _create_entry_and_exit():
-	var mid_x: int = width/2
+	var mid_x: int = (width-1)/2
 	grid[height-1][mid_x] = false #Entry
 	grid[0][mid_x] = false #Exit
 
-func _in_bounds(cell: Vector2i) -> bool:
-	return cell.x > 0 and cell.x < width-1 and cell.y > 0 and cell.y < height-1
+func _generate_level():
+	for z in grid.size():
+		for x in grid[z].size():
+			if grid[x][z]:
+				_generate_wall(x, z)
+			else:
+				pass #Here can be added any other spawned objects
+
+func _generate_wall(x:int, z:int):
+	
+	var wall = WALL.instantiate()
+	add_child(wall)
+	
+	wall.global_position.x = x * wall.get_child(0).mesh.size.x
+	wall.global_position.z = (z-(width-1)/2) * wall.get_child(0).mesh.size.z

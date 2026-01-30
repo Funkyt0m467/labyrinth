@@ -11,8 +11,16 @@ script = ExtResource("1_tcnsb")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_gb1tc")
+debug_color = Color(0, 0.627451, 0.733333, 1)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.63, 0)
 keep_aspect = 0
 current = true
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+light_color = Color(0.718146, 0.438267, 0.265445, 1)
+light_energy = 10.0
+shadow_enabled = true
+omni_range = 15.0

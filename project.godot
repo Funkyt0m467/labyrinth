@@ -11,8 +11,12 @@ config_version=5
 [application]
 
 config/name="Labyrith"
-run/main_scene="uid://db2h3t17k37pe"
+run/main_scene="uid://den388qr5y12s"
 config/features=PackedStringArray("4.4", "Forward Plus")
+
+[display]
+
+window/size/mode=3
 
 [editor]
 

@@ -1,6 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://den388qr5y12s"]
+[gd_scene load_steps=4 format=3 uid="uid://den388qr5y12s"]
 
 [ext_resource type="Script" uid="uid://itvqvjkpent2" path="res://Level/level.gd" id="1_a526m"]
+[ext_resource type="PackedScene" uid="uid://ct2ra7hd6fbr7" path="res://Entities/Player.tscn" id="2_r3cbp"]
+[ext_resource type="Material" uid="uid://b6dviv26cgjo6" path="res://Assets/Ground/Ground078_1K-JPG.tres" id="3_i5eh5"]
 
 [node name="Level" type="Node3D"]
 script = ExtResource("1_a526m")
+
+[node name="Player" parent="." instance=ExtResource("2_r3cbp")]
+transform = Transform3D(-0.0871558, 0, -0.996195, 0, 1, 0, 0.996195, 0, -0.0871558, 0, 0, 0)
+
+[node name="Ground" type="CSGBox3D" parent="."]
+material_override = ExtResource("3_i5eh5")
+use_collision = true
+size = Vector3(1000, 0.5, 1000)
+
+[node name="Ceiling" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+material_overlay = ExtResource("3_i5eh5")
+use_collision = true
+size = Vector3(1000, 0.5, 1000)
