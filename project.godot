@@ -11,12 +11,12 @@ config_version=5
 [application]
 
 config/name="Labyrith"
-run/main_scene="uid://den388qr5y12s"
+run/main_scene="uid://bpbya38c8miok"
 config/features=PackedStringArray("4.4", "Forward Plus")
 
-[display]
+[autoload]
 
-window/size/mode=2
+TransAnim="*res://Menu/TransAnim/TransAnim.tscn"
 
 [editor]
 

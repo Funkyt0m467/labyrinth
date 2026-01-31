@@ -1,0 +1,91 @@
+[gd_scene load_steps=4 format=3 uid="uid://bgu0a005htxxh"]
+
+[ext_resource type="Script" uid="uid://bf80yrpqlnsdd" path="res://Menu/Settings.gd" id="1_cx5vk"]
+[ext_resource type="Theme" uid="uid://cmq34i3s2cxcc" path="res://Menu/Resources/menu_theme_small.tres" id="1_u8bna"]
+[ext_resource type="Texture2D" uid="uid://njmausc1l6fh" path="res://Assets/Sky/NightSkyHDRI001_4K_HDR.exr" id="2_6c3rc"]
+
+[node name="Settings" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_cx5vk")
+metadata/_custom_type_script = "uid://bpan4s8101wi1"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -291.0
+offset_top = -180.0
+offset_right = 249.0
+offset_bottom = 129.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_u8bna")
+
+[node name="VBoxContainer" type="TabContainer" parent="CanvasLayer/VBoxContainer2"]
+layout_mode = 2
+current_tab = 0
+
+[node name="Video" type="GridContainer" parent="CanvasLayer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+columns = 2
+metadata/_tab_index = 0
+
+[node name="ResolutionLabel" type="Label" parent="CanvasLayer/VBoxContainer2/VBoxContainer/Video"]
+layout_mode = 2
+text = "Resolutions"
+
+[node name="Resolutions" type="OptionButton" parent="CanvasLayer/VBoxContainer2/VBoxContainer/Video"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="ModeLabel" type="Label" parent="CanvasLayer/VBoxContainer2/VBoxContainer/Video"]
+layout_mode = 2
+text = "Modes"
+
+[node name="Modes" type="OptionButton" parent="CanvasLayer/VBoxContainer2/VBoxContainer/Video"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Audio" type="VBoxContainer" parent="CanvasLayer/VBoxContainer2/VBoxContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="VolumeLabel" type="Label" parent="CanvasLayer/VBoxContainer2/VBoxContainer/Audio"]
+layout_mode = 2
+text = "Volume"
+
+[node name="Volume" type="HSlider" parent="CanvasLayer/VBoxContainer2/VBoxContainer/Audio"]
+layout_mode = 2
+
+[node name="MusicLabel" type="Label" parent="CanvasLayer/VBoxContainer2/VBoxContainer/Audio"]
+layout_mode = 2
+text = "Music"
+
+[node name="Music" type="HSlider" parent="CanvasLayer/VBoxContainer2/VBoxContainer/Audio"]
+layout_mode = 2
+
+[node name="Controls" type="VBoxContainer" parent="CanvasLayer/VBoxContainer2/VBoxContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="Back" type="Button" parent="CanvasLayer/VBoxContainer2"]
+layout_mode = 2
+text = "Back"
+
+[node name="Background" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+texture = ExtResource("2_6c3rc")
+
+[connection signal="button_down" from="CanvasLayer/VBoxContainer2/Back" to="." method="_on_back_button_down"]

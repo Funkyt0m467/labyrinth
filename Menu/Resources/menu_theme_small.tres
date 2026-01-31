@@ -1,0 +1,54 @@
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://cmq34i3s2cxcc"]
+
+[ext_resource type="FontFile" uid="uid://c3wxt0l7d1bx3" path="res://Assets/Font/default.ttf" id="1_848v2"]
+[ext_resource type="StyleBox" uid="uid://dslgdwbaf23uw" path="res://Menu/Resources/main_menu_small.tres" id="2_pbow4"]
+[ext_resource type="StyleBox" uid="uid://tuoo0xug6g7s" path="res://Menu/Resources/main_menu_focus_small.tres" id="3_3xb6r"]
+[ext_resource type="StyleBox" uid="uid://cfge72rjxgfpp" path="res://Menu/Resources/main_manu_small_label.tres" id="5_dd1aa"]
+[ext_resource type="StyleBox" uid="uid://dgmav623neoew" path="res://Menu/Resources/popup_menu.tres" id="6_epum4"]
+[ext_resource type="StyleBox" uid="uid://d0ge28ad6tu3a" path="res://Menu/Resources/tab_small_focus.tres" id="7_so3l1"]
+[ext_resource type="StyleBox" uid="uid://tku4ddmummyj" path="res://Menu/Resources/tab_small.tres" id="8_3xb6r"]
+
+[resource]
+default_font = ExtResource("1_848v2")
+Button/constants/h_separation = 4
+Button/font_sizes/font_size = 24
+Button/fonts/font = ExtResource("1_848v2")
+Button/styles/disabled = ExtResource("2_pbow4")
+Button/styles/focus = ExtResource("3_3xb6r")
+Button/styles/hover = ExtResource("2_pbow4")
+Button/styles/hover_pressed = ExtResource("2_pbow4")
+Button/styles/normal = ExtResource("2_pbow4")
+Button/styles/pressed = ExtResource("2_pbow4")
+HBoxContainer/constants/separation = 16
+Label/constants/line_spacing = 3
+Label/constants/shadow_offset_x = 1
+Label/constants/shadow_offset_y = 1
+Label/constants/shadow_outline_size = 1
+Label/font_sizes/font_size = 24
+Label/fonts/font = ExtResource("1_848v2")
+Label/styles/normal = ExtResource("2_pbow4")
+OptionButton/font_sizes/font_size = 24
+OptionButton/fonts/font = ExtResource("1_848v2")
+OptionButton/styles/disabled = ExtResource("2_pbow4")
+OptionButton/styles/focus = ExtResource("3_3xb6r")
+OptionButton/styles/hover = ExtResource("2_pbow4")
+OptionButton/styles/hover_pressed = ExtResource("2_pbow4")
+OptionButton/styles/normal = ExtResource("5_dd1aa")
+OptionButton/styles/pressed = ExtResource("5_dd1aa")
+PopupMenu/colors/font_hover_color = Color(0.94902, 0.94902, 0.94902, 1)
+PopupMenu/constants/v_separation = 16
+PopupMenu/font_sizes/font_separator_size = 24
+PopupMenu/font_sizes/font_size = 24
+PopupMenu/font_sizes/title_font_size = 24
+PopupMenu/fonts/font = ExtResource("1_848v2")
+PopupMenu/styles/hover = ExtResource("6_epum4")
+PopupMenu/styles/panel = ExtResource("6_epum4")
+TabContainer/font_sizes/font_size = 32
+TabContainer/fonts/font = ExtResource("1_848v2")
+TabContainer/styles/panel = ExtResource("8_3xb6r")
+TabContainer/styles/tab_disabled = ExtResource("8_3xb6r")
+TabContainer/styles/tab_focus = ExtResource("7_so3l1")
+TabContainer/styles/tab_hovered = ExtResource("8_3xb6r")
+TabContainer/styles/tab_selected = ExtResource("8_3xb6r")
+TabContainer/styles/tab_unselected = ExtResource("8_3xb6r")
+VBoxContainer/constants/separation = 16

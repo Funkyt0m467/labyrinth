@@ -1,0 +1,50 @@
+[gd_scene load_steps=4 format=3 uid="uid://bpbya38c8miok"]
+
+[ext_resource type="Script" uid="uid://bpan4s8101wi1" path="res://Menu/Menu.gd" id="1_jf1j2"]
+[ext_resource type="Theme" uid="uid://csif2xx86853p" path="res://Menu/Resources/menu_theme.tres" id="2_e56cd"]
+[ext_resource type="Texture2D" uid="uid://njmausc1l6fh" path="res://Assets/Sky/NightSkyHDRI001_4K_HDR.exr" id="2_u03px"]
+
+[node name="Menu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_e56cd")
+script = ExtResource("1_jf1j2")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(545, 320)
+texture = ExtResource("2_u03px")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -97.5
+offset_top = -113.5
+offset_right = 97.5
+offset_bottom = 113.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Play" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Play"
+
+[node name="Settings" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Settings"
+
+[node name="Exit" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Exit"
+
+[connection signal="button_down" from="VBoxContainer/Play" to="." method="_on_play_button_down"]
+[connection signal="button_down" from="VBoxContainer/Settings" to="." method="_on_settings_button_down"]
+[connection signal="button_down" from="VBoxContainer/Exit" to="." method="_on_exit_button_down"]

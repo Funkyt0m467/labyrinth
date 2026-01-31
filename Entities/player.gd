@@ -18,8 +18,9 @@ func _ready() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	
-	if Input.is_action_just_pressed("escape"):
-		get_tree().quit()
+	if Input.is_action_pressed("escape"):
+		var popup_menu = preload("res://Menu/PopupMenu.tscn").instantiate()
+		get_parent().add_child(popup_menu)
 	
 	if event is InputEventMouseMotion:
 		self.rotate_y(-event.relative.x*SENSI)

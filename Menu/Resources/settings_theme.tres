@@ -1,0 +1,9 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://bdwmakx47m4l4"]
+
+[ext_resource type="FontFile" uid="uid://c3wxt0l7d1bx3" path="res://Assets/Font/default.ttf" id="1_huffi"]
+
+[resource]
+Button/constants/h_separation = 4
+Button/font_sizes/font_size = 16
+Button/fonts/font = ExtResource("1_huffi")
+Button/styles/normal = null
