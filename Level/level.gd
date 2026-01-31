@@ -2,7 +2,7 @@ extends Node3D
 
 const WALL := preload("res://Level/Wall.tscn")
 
-var width: int = 19
+var width: int = 31
 var height: int = width
 
 var grid: Array = [] #2D grid of bools, wall = true, path = false
@@ -25,7 +25,7 @@ func _ready():
 func print_grid():
 	var output := ""
 
-	for y in grid.size():
+	for y in range(grid.size() - 1, -1, -1): #This way the start is at the bottom, end at the top
 		for x in grid[y].size():
 			output += "██" if grid[y][x] else "  "
 		output += "\n"

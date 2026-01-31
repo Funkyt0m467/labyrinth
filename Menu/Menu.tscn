@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bpbya38c8miok"]
 
-[ext_resource type="Script" uid="uid://bpan4s8101wi1" path="res://Menu/Menu.gd" id="1_jf1j2"]
+[ext_resource type="Script" uid="uid://bpan4s8101wi1" path="res://Menu/Scripts/Menu.gd" id="1_jf1j2"]
 [ext_resource type="Theme" uid="uid://csif2xx86853p" path="res://Menu/Resources/menu_theme.tres" id="2_e56cd"]
 [ext_resource type="Texture2D" uid="uid://njmausc1l6fh" path="res://Assets/Sky/NightSkyHDRI001_4K_HDR.exr" id="2_u03px"]
 
