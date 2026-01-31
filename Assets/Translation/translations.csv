@@ -1,0 +1,141 @@
+key,en,fr
+
+MENU_CONTINUE,Continue,Continuer
+MENU_NEW_GAME,New Game,Nouvelle Partie
+MENU_SETTINGS,Settings,Paramètres
+MENU_EXIT,Exit,Quitter
+
+SETTING_VIDEO_SCREEN,Screen,Écran
+SETTING_VIDEO,Display,Affichage
+SETTING_VIDEO_MODE,Display mode,Mode d'affichage
+SETTING_VIDEO_WINDOWED,Windowed,Fenêtré
+SETTING_VIDEO_BORDERLESS,Borderless window,Fenêtre sans bordure
+SETTING_VIDEO_FULLSCREEN,Fullscreen,Plein écran
+SETTING_VIDEO_RESOLUTION,Resolution,Résolution
+
+SETTING_AUDIO,Sound,Son
+
+SETTING_UI,Interface,Interface
+SETTING_LANGUAGES,Languages,Langues
+SETTING_UI_SIZE,Menu size,Taille des menus
+SETTING_UI_SPEED,Dialogue speed,Vitesse des dialogues
+
+SETTING_CONTROLS,Controls,Contrôles
+SETTING_CONTROLS_REBIND,Press any key...,Appuyer sur une touche...
+SETTING_CONTROLS_RESET,Reset,Réinitialiser
+SETTING_CONTROLS_up,Up,Haut
+SETTING_CONTROLS_down,Down,Bas
+SETTING_CONTROLS_left,Left,Gauche
+SETTING_CONTROLS_right,Right,Droite
+SETTING_CONTROLS_switch,Transformation,Transformation
+SETTING_CONTROLS_interact,Interact,Interagir
+SETTING_CONTROLS_next,Next,Suivant
+SETTING_CONTROLS_previous,Previous,Précédent
+SETTING_CONTROLS_ui_accept,Select,Selectioner
+SETTING_CONTROLS_ui_cancel,Back,Retour
+SETTING_CONTROLS_ui_up,Up,Haut
+SETTING_CONTROLS_ui_down,Down,Bas
+SETTING_CONTROLS_ui_left,Left,Gauche
+SETTING_CONTROLS_ui_right,Right,Droite
+
+SETTING_GAME,Game,Jeu
+SETTING_DIFFICULTY,Difficulty,Difficulté
+
+KEY_A,A,Q
+KEY_B,B,B
+KEY_C,C,C
+KEY_D,D,D
+KEY_E,E,E
+KEY_F,F,F
+KEY_G,G,G
+KEY_H,H,H
+KEY_I,I,I
+KEY_J,J,J
+KEY_K,K,K
+KEY_L,L,L
+KEY_M,M,","
+KEY_N,N,N
+KEY_O,O,O
+KEY_P,P,P
+KEY_Q,Q,A
+KEY_R,R,R
+KEY_S,S,S
+KEY_T,T,T
+KEY_U,U,U
+KEY_V,V,V
+KEY_W,W,Z
+KEY_X,X,X
+KEY_Y,Y,Y
+KEY_Z,Z,W
+
+KEY_QUOTELEFT,`,²
+KEY_1,1,&
+KEY_2,2,é
+KEY_3,3,""""
+KEY_4,4,'
+KEY_5,5,(
+KEY_6,6,-
+KEY_7,7,è
+KEY_8,8,_
+KEY_9,9,ç
+KEY_0,0,à
+KEY_MINUS,-,)
+KEY_EQUAL,=,=
+
+KEY_BRACKETLEFT,[,^
+KEY_BRACKETRIGHT,],$
+KEY_SEMICOLON,;,M
+KEY_APOSTROPHE,',ù
+KEY_BACKSLASH,\\,*
+KEY_COMMA,",",;
+KEY_PERIOD,.,:
+KEY_SLASH,/,!
+
+KEY_ESCAPE,Escape,Échap
+KEY_ENTER,Enter,Entrée
+KEY_SPACE,Space,Espace
+KEY_TAB,Tab,Tab
+KEY_SHIFT,Shift,Maj
+KEY_BACKSPACE,Backspace,Retour
+KEY_INSERT,Inser,Inser
+KEY_DELETE,Delete,Suppr
+KEY_UP,Up,Haut
+KEY_DOWN,Down,Bas
+KEY_LEFT,Left,Gauche
+KEY_RIGHT,Right,Droite
+KEY_HOME,Home,Accueil
+KEY_END,End,Fin
+KEY_PAGEUP,Page Up,Page Précédente
+KEY_PAGEDOWN,Page Down,Page Suivante
+KEY_CAPSLOCK,Caps Lock,Verr Maj
+KEY_NUMLOCK,Num Lock,Verr Num
+KEY_SCREENPRINT,Print Screen,Impr. Écran
+KEY_LOCKSCROLL,Scroll Lock,Arrêt Défil
+KEY_CTRL,Ctrl,Ctrl
+KEY_ALT,Alt,Alt
+KEY_WINDOWS,Windows,Windows
+
+KEY_KP 0,Numpad 0,Pavé numérique 0
+KEY_KP 1,Numpad 1,Pavé numérique 1
+KEY_KP 2,Numpad 2,Pavé numérique 2
+KEY_KP 3,Numpad 3,Pavé numérique 3
+KEY_KP 4,Numpad 4,Pavé numérique 4
+KEY_KP 5,Numpad 5,Pavé numérique 5
+KEY_KP 6,Numpad 6,Pavé numérique 6
+KEY_KP 7,Numpad 7,Pavé numérique 7
+KEY_KP 8,Numpad 8,Pavé numérique 8
+KEY_KP 9,Numpad 9,Pavé numérique 9
+KEY_KP DIVIDE,Numpad /,Pavé numérique /
+KEY_KP MULTIPLY,Numpad *,Pavé numérique *
+KEY_KP SUBSTRACT,Numpad -,Pavé numérique -
+KEY_KP ADD,Numpad +,Pavé numérique +
+KEY_KP ENTER,Numpad Enter,Pavé numérique Entrée
+KEY_KP PERIOD,Numpad .,Pavé numérique .
+
+SETTINGS_MOVEMENTS,Movements,Mouvements
+SETTINGS_INTERACTIONS,Interactions,Interactions
+
+MENU_BACK,Return,Retour
+
+MENU_SAVE,Save,Sauvegarder
+MENU_MAIN_MENU,Main menu,Menu principal

@@ -7,85 +7,128 @@
 [node name="Settings" type="Control"]
 process_mode = 3
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("1_cx5vk")
-metadata/_custom_type_script = "uid://bpan4s8101wi1"
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -291.0
-offset_top = -180.0
-offset_right = 249.0
-offset_bottom = 129.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_u8bna")
-
-[node name="VBoxContainer" type="TabContainer" parent="CanvasLayer/VBoxContainer2"]
-layout_mode = 2
-current_tab = 0
-
-[node name="Video" type="GridContainer" parent="CanvasLayer/VBoxContainer2/VBoxContainer"]
-layout_mode = 2
-columns = 2
-metadata/_tab_index = 0
-
-[node name="ResolutionLabel" type="Label" parent="CanvasLayer/VBoxContainer2/VBoxContainer/Video"]
-layout_mode = 2
-text = "Resolutions"
-
-[node name="Resolutions" type="OptionButton" parent="CanvasLayer/VBoxContainer2/VBoxContainer/Video"]
-unique_name_in_owner = true
-layout_mode = 2
-
-[node name="ModeLabel" type="Label" parent="CanvasLayer/VBoxContainer2/VBoxContainer/Video"]
-layout_mode = 2
-text = "Modes"
-
-[node name="Modes" type="OptionButton" parent="CanvasLayer/VBoxContainer2/VBoxContainer/Video"]
-unique_name_in_owner = true
-layout_mode = 2
-
-[node name="Audio" type="VBoxContainer" parent="CanvasLayer/VBoxContainer2/VBoxContainer"]
-visible = false
-layout_mode = 2
-metadata/_tab_index = 1
-
-[node name="VolumeLabel" type="Label" parent="CanvasLayer/VBoxContainer2/VBoxContainer/Audio"]
-layout_mode = 2
-text = "Volume"
-
-[node name="Volume" type="HSlider" parent="CanvasLayer/VBoxContainer2/VBoxContainer/Audio"]
-layout_mode = 2
-
-[node name="MusicLabel" type="Label" parent="CanvasLayer/VBoxContainer2/VBoxContainer/Audio"]
-layout_mode = 2
-text = "Music"
-
-[node name="Music" type="HSlider" parent="CanvasLayer/VBoxContainer2/VBoxContainer/Audio"]
-layout_mode = 2
-
-[node name="Controls" type="VBoxContainer" parent="CanvasLayer/VBoxContainer2/VBoxContainer"]
-visible = false
-layout_mode = 2
-metadata/_tab_index = 2
-
-[node name="Back" type="Button" parent="CanvasLayer/VBoxContainer2"]
-layout_mode = 2
-text = "Back"
+script = ExtResource("1_cx5vk")
+metadata/_custom_type_script = "uid://bpan4s8101wi1"
 
 [node name="Background" type="Sprite2D" parent="."]
 unique_name_in_owner = true
 texture = ExtResource("2_6c3rc")
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.2
+anchor_right = 0.8
+anchor_bottom = 0.8
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_u8bna")
+theme_override_constants/separation = 0
+
+[node name="VBoxContainer" type="TabContainer" parent="CanvasLayer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+tab_alignment = 1
+current_tab = 0
+
+[node name="SETTING_VIDEO" type="GridContainer" parent="CanvasLayer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+columns = 2
+metadata/_tab_index = 0
+
+[node name="ScreenLabel" type="Label" parent="CanvasLayer/VBoxContainer2/VBoxContainer/SETTING_VIDEO"]
+layout_mode = 2
+text = "SETTING_VIDEO_SCREEN"
+
+[node name="Screens" type="OptionButton" parent="CanvasLayer/VBoxContainer2/VBoxContainer/SETTING_VIDEO"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="ResolutionLabel" type="Label" parent="CanvasLayer/VBoxContainer2/VBoxContainer/SETTING_VIDEO"]
+layout_mode = 2
+text = "SETTING_VIDEO_RESOLUTION"
+
+[node name="Resolutions" type="OptionButton" parent="CanvasLayer/VBoxContainer2/VBoxContainer/SETTING_VIDEO"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="ModeLabel" type="Label" parent="CanvasLayer/VBoxContainer2/VBoxContainer/SETTING_VIDEO"]
+layout_mode = 2
+text = "SETTING_VIDEO_MODE"
+
+[node name="Modes" type="OptionButton" parent="CanvasLayer/VBoxContainer2/VBoxContainer/SETTING_VIDEO"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="SETTING_AUDIO" type="VBoxContainer" parent="CanvasLayer/VBoxContainer2/VBoxContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="VolumeLabel" type="Label" parent="CanvasLayer/VBoxContainer2/VBoxContainer/SETTING_AUDIO"]
+layout_mode = 2
+text = "Volume"
+
+[node name="Volume" type="HSlider" parent="CanvasLayer/VBoxContainer2/VBoxContainer/SETTING_AUDIO"]
+unique_name_in_owner = true
+layout_mode = 2
+value = 100.0
+
+[node name="MusicLabel" type="Label" parent="CanvasLayer/VBoxContainer2/VBoxContainer/SETTING_AUDIO"]
+layout_mode = 2
+text = "Music"
+
+[node name="Music" type="HSlider" parent="CanvasLayer/VBoxContainer2/VBoxContainer/SETTING_AUDIO"]
+unique_name_in_owner = true
+layout_mode = 2
+value = 100.0
+
+[node name="SETTING_CONTROLS" type="VBoxContainer" parent="CanvasLayer/VBoxContainer2/VBoxContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="SETTING_GAME" type="GridContainer" parent="CanvasLayer/VBoxContainer2/VBoxContainer"]
+visible = false
+layout_mode = 2
+columns = 2
+metadata/_tab_index = 3
+
+[node name="LanguageLabel" type="Label" parent="CanvasLayer/VBoxContainer2/VBoxContainer/SETTING_GAME"]
+layout_mode = 2
+text = "SETTING_LANGUAGES"
+
+[node name="Languages" type="OptionButton" parent="CanvasLayer/VBoxContainer2/VBoxContainer/SETTING_GAME"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="DifficultyLabel" type="Label" parent="CanvasLayer/VBoxContainer2/VBoxContainer/SETTING_GAME"]
+layout_mode = 2
+text = "SETTING_DIFFICULTY"
+
+[node name="DIfficulty" type="OptionButton" parent="CanvasLayer/VBoxContainer2/VBoxContainer/SETTING_GAME"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Back" type="Button" parent="CanvasLayer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
+text = "MENU_BACK"
+
+[connection signal="item_selected" from="CanvasLayer/VBoxContainer2/VBoxContainer/SETTING_VIDEO/Screens" to="." method="_on_list_selected" binds= ["screens"]]
+[connection signal="item_selected" from="CanvasLayer/VBoxContainer2/VBoxContainer/SETTING_VIDEO/Resolutions" to="." method="_on_list_selected" binds= ["resolutions"]]
+[connection signal="item_selected" from="CanvasLayer/VBoxContainer2/VBoxContainer/SETTING_VIDEO/Modes" to="." method="_on_list_selected" binds= ["modes"]]
+[connection signal="item_selected" from="CanvasLayer/VBoxContainer2/VBoxContainer/SETTING_GAME/Languages" to="." method="_on_list_selected" binds= ["languages"]]
 [connection signal="button_down" from="CanvasLayer/VBoxContainer2/Back" to="." method="_on_back_button_down"]

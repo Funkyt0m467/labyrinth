@@ -32,16 +32,16 @@ theme = ExtResource("2_46ot3")
 
 [node name="Settings" type="Button" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
-text = "Settings"
+text = "MENU_SETTINGS"
 
-[node name="Menu" type="Button" parent="CanvasLayer/VBoxContainer"]
+[node name="MainMenu" type="Button" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
-text = "Menu"
+text = "MENU_MAIN_MENU"
 
 [node name="Exit" type="Button" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
-text = "Exit"
+text = "MENU_EXIT"
 
 [connection signal="button_down" from="CanvasLayer/VBoxContainer/Settings" to="." method="_on_settings_button_down"]
-[connection signal="button_down" from="CanvasLayer/VBoxContainer/Menu" to="." method="_on_menu_button_down"]
+[connection signal="button_down" from="CanvasLayer/VBoxContainer/MainMenu" to="." method="_on_menu_button_down"]
 [connection signal="button_down" from="CanvasLayer/VBoxContainer/Exit" to="." method="_on_exit_button_down"]
