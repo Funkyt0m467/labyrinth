@@ -4,12 +4,12 @@ func _ready() -> void:
 	pass
 
 func _on_play_button_down() -> void:
-	_switch_scene("res://Level/Level.tscn")
+	switch_scene("res://Level/Level.tscn")
 
 func _on_settings_button_down() -> void:
-	_switch_scene("res://Menu/Settings.tscn")
+	switch_scene("res://Menu/Settings.tscn")
 
-func _switch_scene(_path:String):
+func switch_scene(_path:String):
 	
 	await TransAnim.fade_out()
 	

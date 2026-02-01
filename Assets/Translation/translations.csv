@@ -14,6 +14,9 @@ SETTING_VIDEO_FULLSCREEN,Fullscreen,Plein écran
 SETTING_VIDEO_RESOLUTION,Resolution,Résolution
 
 SETTING_AUDIO,Sound,Son
+SETTING_VOLUME,Volume,Volume
+SETTING_MUSIC,Music,Musique
+SETTING_SOUND,Sound,Son
 
 SETTING_UI,Interface,Interface
 SETTING_LANGUAGES,Languages,Langues
@@ -139,3 +142,4 @@ MENU_BACK,Return,Retour
 
 MENU_SAVE,Save,Sauvegarder
 MENU_MAIN_MENU,Main menu,Menu principal
+MENU_RESUME,Resume,Reprendre

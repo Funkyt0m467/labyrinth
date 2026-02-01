@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://qswcfmcbkbvt"]
+
+[ext_resource type="Script" uid="uid://bqgryfafhl7wm" path="res://Entities/Map/map.gd" id="1_a375d"]
+[ext_resource type="Texture2D" uid="uid://cutfr3cxribri" path="res://Assets/Map/kiKB85aRT.png" id="1_rcg68"]
+
+[node name="Map" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_a375d")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MapBackground" type="Sprite2D" parent="CanvasLayer"]
+unique_name_in_owner = true
+position = Vector2(571, 420)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_rcg68")
+
+[node name="MazePosition" type="Marker2D" parent="CanvasLayer"]
+unique_name_in_owner = true
+position = Vector2(434, 271)

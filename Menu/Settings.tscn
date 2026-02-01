@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bgu0a005htxxh"]
 
-[ext_resource type="Script" uid="uid://bf80yrpqlnsdd" path="res://Menu/Scripts/Settings.gd" id="1_cx5vk"]
+[ext_resource type="Script" uid="uid://bf80yrpqlnsdd" path="res://Menu/Scripts/settings.gd" id="1_cx5vk"]
 [ext_resource type="Theme" uid="uid://cmq34i3s2cxcc" path="res://Menu/Resources/menu_theme_small.tres" id="1_u8bna"]
 [ext_resource type="Texture2D" uid="uid://njmausc1l6fh" path="res://Assets/Sky/NightSkyHDRI001_4K_HDR.exr" id="2_6c3rc"]
 
@@ -22,6 +22,7 @@ unique_name_in_owner = true
 texture = ExtResource("2_6c3rc")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer"]
 anchors_preset = -1
@@ -78,7 +79,7 @@ metadata/_tab_index = 1
 
 [node name="VolumeLabel" type="Label" parent="CanvasLayer/VBoxContainer2/VBoxContainer/SETTING_AUDIO"]
 layout_mode = 2
-text = "Volume"
+text = "SETTING_VOLUME"
 
 [node name="Volume" type="HSlider" parent="CanvasLayer/VBoxContainer2/VBoxContainer/SETTING_AUDIO"]
 unique_name_in_owner = true
@@ -87,9 +88,18 @@ value = 100.0
 
 [node name="MusicLabel" type="Label" parent="CanvasLayer/VBoxContainer2/VBoxContainer/SETTING_AUDIO"]
 layout_mode = 2
-text = "Music"
+text = "SETTING_MUSIC"
 
 [node name="Music" type="HSlider" parent="CanvasLayer/VBoxContainer2/VBoxContainer/SETTING_AUDIO"]
+unique_name_in_owner = true
+layout_mode = 2
+value = 100.0
+
+[node name="SoundLabel" type="Label" parent="CanvasLayer/VBoxContainer2/VBoxContainer/SETTING_AUDIO"]
+layout_mode = 2
+text = "SETTING_SOUND"
+
+[node name="Sound" type="HSlider" parent="CanvasLayer/VBoxContainer2/VBoxContainer/SETTING_AUDIO"]
 unique_name_in_owner = true
 layout_mode = 2
 value = 100.0

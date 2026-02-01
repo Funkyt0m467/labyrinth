@@ -1,16 +1,21 @@
 extends Control
 
+var map_opened #Mouse shouldn't be captured on exit if true
+
 func _ready() -> void:
 	get_tree().paused = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _input(_event: InputEvent) -> void:
 	if _event.is_action_pressed("escape"):
-		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-		self.queue_free()
+		_on_resume_button_down()
 
 func _exit_tree() -> void:
 	get_tree().paused = false
+
+func _on_resume_button_down() -> void:
+	if !map_opened: Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	self.queue_free()
 
 func _on_settings_button_down() -> void:
 	self.queue_free()

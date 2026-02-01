@@ -7,6 +7,7 @@ var height: int = width
 
 var grid: Array = [] #2D grid of bools, wall = true, path = false
 var walls: Array[CSGBox3D] = [] #Array of boxes for each wall section
+var wall_size: Vector3
 
 func _ready():
 	
@@ -83,5 +84,7 @@ func _generate_wall(x:int, z:int):
 	var wall = WALL.instantiate()
 	add_child(wall)
 	
-	wall.global_position.x = x * wall.get_child(0).mesh.size.x
-	wall.global_position.z = (z-((width-1)>>1)) * wall.get_child(0).mesh.size.z
+	wall_size = wall.get_child(0).mesh.size
+	
+	wall.global_position.x = x * wall_size.x
+	wall.global_position.z = (z-((width-1)>>1)) * wall_size.z

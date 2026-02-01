@@ -72,4 +72,4 @@ func _on_back_button_down() -> void:
 		var popup_menu = load("res://Menu/PopupMenu.tscn").instantiate()
 		get_parent().add_child(popup_menu)
 	else:
-		_switch_scene("res://Menu/Menu.tscn")
+		switch_scene("res://Menu/Menu.tscn")
