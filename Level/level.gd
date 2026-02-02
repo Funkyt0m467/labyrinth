@@ -115,3 +115,8 @@ func _generate_camera(x:int, z:int):
 	camera.global_position.z = (z-(height-1)) * wall_size.z
 	
 	camera.rotation_degrees.x = -90 #Look straight down on init
+	
+	var light = load("res://Entities/Light/Light.tscn").instantiate()
+	camera.add_child(light)
+	
+	camera.visible = false

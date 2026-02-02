@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://ct2ra7hd6fbr7"]
 
 [ext_resource type="Script" uid="uid://dogtnb8j3fgiw" path="res://Entities/Player/player.gd" id="1_tcnsb"]
-[ext_resource type="Script" uid="uid://nasx76nqy6gq" path="res://Assets/torch_light.gd" id="2_1iada"]
+[ext_resource type="Script" uid="uid://nasx76nqy6gq" path="res://Entities/Light/torch_light.gd" id="2_1iada"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gb1tc"]
 

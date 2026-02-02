@@ -58,8 +58,8 @@ func place_player():
 	rect.size = Vector2(map_wall_size.x*0.75, map_wall_size.y*0.75)
 	
 	var grid_player_pos: Vector2i
-	grid_player_pos.x = int((player_pos.z+0.5*wall_size.z)/wall_size.z) + ((maze_size.x-1)>>1)
-	grid_player_pos.y = int(-(player_pos.x+0.5*wall_size.x)/wall_size.x) + (maze_size.y-1)
+	grid_player_pos.x = int((player_pos.x-0.5*wall_size.x)/wall_size.x) + ((maze_size.x-1)>>1)
+	grid_player_pos.y = int((player_pos.z-0.5*wall_size.z)/wall_size.z) + (maze_size.y-1)
 	
 	var map_player_pos: Vector2
 	map_player_pos.x = map_wall_size.x*grid_player_pos.x + map_wall_size.x*0.125
@@ -93,6 +93,6 @@ func place_camera(pos: Vector2i):
 
 func _switch_camera(key: int):
 	cameras[key].make_current()
-	
+	cameras[key].visible = true #This also toggle its child lighting
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	self.queue_free()

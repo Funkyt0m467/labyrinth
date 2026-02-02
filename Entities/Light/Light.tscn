@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://dix2bq5evnnv1"]
+
+[ext_resource type="Script" uid="uid://nasx76nqy6gq" path="res://Entities/Light/torch_light.gd" id="1_2cs83"]
+
+[node name="Light" type="OmniLight3D"]
+light_color = Color(0.0672361, 0.299904, 0.702126, 1)
+light_energy = 30.0
+omni_range = 30.0
+omni_attenuation = 1.4
+script = ExtResource("1_2cs83")
+range_variation = 15.0
+energy_variation = 15.0

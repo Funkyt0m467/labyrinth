@@ -4,7 +4,7 @@
 [ext_resource type="Sky" uid="uid://crmiiiy06tskn" path="res://Level/Resources/Sky/NightSkyHDRI001_4K.tres" id="2_i5eh5"]
 [ext_resource type="PackedScene" uid="uid://ct2ra7hd6fbr7" path="res://Entities/Player/Player.tscn" id="2_r3cbp"]
 [ext_resource type="Material" uid="uid://b6dviv26cgjo6" path="res://Level/Resources/Ground/Ground078_1K-JPG.tres" id="3_i5eh5"]
-[ext_resource type="Script" uid="uid://nasx76nqy6gq" path="res://Assets/torch_light.gd" id="5_5noo7"]
+[ext_resource type="Script" uid="uid://nasx76nqy6gq" path="res://Entities/Light/torch_light.gd" id="5_5noo7"]
 
 [sub_resource type="Environment" id="Environment_cyxyq"]
 background_mode = 2
@@ -39,9 +39,16 @@ size = Vector3(1000, 0.5, 1000)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.636671, 0.771136, 0, -0.771136, 0.636671, 0, 41.316, 0)
+visible = false
 light_color = Color(0.0913495, 0.0432358, 0.510565, 1)
 light_energy = 2.371
 sky_mode = 1
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 32.0933, 0)
+visible = false
+light_color = Color(0.0570306, 0.173438, 0.922759, 1)
+light_energy = 100.0
+omni_range = 50000.0
 script = ExtResource("5_5noo7")
+energy_variation = 100.0
