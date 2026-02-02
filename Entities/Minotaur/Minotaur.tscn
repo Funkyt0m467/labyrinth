@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bvrx4gil60xrr"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_t68n1"]
+
+[node name="Minotaur" type="CharacterBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_t68n1")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]

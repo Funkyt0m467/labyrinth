@@ -27,3 +27,5 @@ mesh = SubResource("BoxMesh_3c75l")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 shape = SubResource("BoxShape3D_rmvkh")
+
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="."]

@@ -98,7 +98,7 @@ func _generate_level():
 func _generate_wall(x:int, z:int):
 	
 	var wall = WALL.instantiate()
-	add_child(wall)
+	%Walls.add_child(wall)
 	
 	wall_size = wall.get_child(0).mesh.size
 	
@@ -107,7 +107,7 @@ func _generate_wall(x:int, z:int):
 
 func _generate_camera(x:int, z:int):
 	var camera := Camera3D.new()
-	add_child(camera)
+	%Cameras.add_child(camera)
 	cameras[x+z] = camera
 	
 	camera.global_position.x = (x-((width-1)>>1)) * wall_size.x

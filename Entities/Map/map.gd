@@ -4,6 +4,7 @@ var player_pos: Vector3
 var player_camera: Camera3D
 
 var in_camera: bool = false
+var in_transition: bool = false
 
 @onready var level: Node = get_parent()
 @onready var grid: Array = level.grid
@@ -24,7 +25,7 @@ func _ready() -> void:
 
 func _input(_event: InputEvent) -> void:
 	if _event.is_action_pressed("map"):
-		if in_camera: #Going back to the player and the map
+		if in_camera: #Going back to the player camera and the map
 			in_camera = false
 			
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
@@ -32,7 +33,7 @@ func _input(_event: InputEvent) -> void:
 			
 			get_viewport().get_camera_3d().visible = false #Switching off the current camera
 			player_camera.make_current()
-		else:
+		else: #closing the map
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 			self.queue_free()
 
@@ -98,6 +99,7 @@ func place_camera(pos: Vector2i):
 	
 	button.size = rect.size
 	button.position = rect.position
+	button.modulate.a = 0.0
 	
 	button.pressed.connect(Callable(self, "_switch_camera").bind(pos.x+pos.y))
 	
@@ -105,6 +107,7 @@ func place_camera(pos: Vector2i):
 
 func _switch_camera(key: int):
 	
+	in_transition = true
 	await TransAnim.fade_out()
 	
 	cameras[key].make_current()
@@ -113,6 +116,8 @@ func _switch_camera(key: int):
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
 	in_camera = true
-	get_child(0).visible = false #Hide the map while in camera
+	get_child(0).visible = false #Hide the map while in a camera
 	
 	await TransAnim.fade_in()
+	in_transition = false
+	

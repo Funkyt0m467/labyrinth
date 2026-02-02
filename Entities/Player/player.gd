@@ -22,9 +22,9 @@ func _ready() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	
-	if Input.is_action_just_pressed("escape"):
+	if Input.is_action_just_pressed("escape") and (!map or !map.in_transition):
 		var popup_menu = preload("res://Menu/PopupMenu.tscn").instantiate()
-		popup_menu.map_opened = map #Tell the menu if map exist (aka is opened)
+		popup_menu.map_opened = map and !map.in_camera #Tell the menu if map is opened (not in camera)
 		get_parent().add_child(popup_menu)
 	
 	if(!map): #open map or look around only when map isn't opened
