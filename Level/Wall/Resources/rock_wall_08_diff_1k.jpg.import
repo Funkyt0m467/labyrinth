@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://2s5ftetdqdh7"
-path.s3tc="res://.godot/imported/rock_wall_08_nor_gl_1k.png-470f068e257993577532510f11783313.s3tc.ctex"
+uid="uid://dordul342wk1m"
+path.s3tc="res://.godot/imported/rock_wall_08_diff_1k.jpg-16ee2dbcec5321ee193ac1a0c5969960.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Level/Resources/StoneWall/rock_wall_08_nor_gl_1k.png"
-dest_files=["res://.godot/imported/rock_wall_08_nor_gl_1k.png-470f068e257993577532510f11783313.s3tc.ctex"]
+source_file="res://Level/Wall/Resources/rock_wall_08_diff_1k.jpg"
+dest_files=["res://.godot/imported/rock_wall_08_diff_1k.jpg-16ee2dbcec5321ee193ac1a0c5969960.s3tc.ctex"]
 
 [params]
 
@@ -20,12 +20,12 @@ compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/normal_map=1
+compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
-roughness/mode=1
-roughness/src_normal="res://Assets/StoneWall/rock_wall_08_nor_gl_1k.png"
+roughness/mode=0
+roughness/src_normal=""
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false

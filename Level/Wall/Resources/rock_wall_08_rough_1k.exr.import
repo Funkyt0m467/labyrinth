@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dordul342wk1m"
-path.s3tc="res://.godot/imported/rock_wall_08_diff_1k.jpg-3d006b5ea82061b0d2098a10cb868492.s3tc.ctex"
+uid="uid://ebjqihrrausk"
+path.bptc="res://.godot/imported/rock_wall_08_rough_1k.exr-b3682e94187aed7c47844586478a212f.bptc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Level/Resources/StoneWall/rock_wall_08_diff_1k.jpg"
-dest_files=["res://.godot/imported/rock_wall_08_diff_1k.jpg-3d006b5ea82061b0d2098a10cb868492.s3tc.ctex"]
+source_file="res://Level/Wall/Resources/rock_wall_08_rough_1k.exr"
+dest_files=["res://.godot/imported/rock_wall_08_rough_1k.exr-b3682e94187aed7c47844586478a212f.bptc.ctex"]
 
 [params]
 

@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://den388qr5y12s"]
+[gd_scene load_steps=7 format=3 uid="uid://den388qr5y12s"]
 
 [ext_resource type="Script" uid="uid://itvqvjkpent2" path="res://Level/level.gd" id="1_a526m"]
 [ext_resource type="Sky" uid="uid://crmiiiy06tskn" path="res://Level/Resources/Sky/NightSkyHDRI001_4K.tres" id="2_i5eh5"]
 [ext_resource type="PackedScene" uid="uid://ct2ra7hd6fbr7" path="res://Entities/Player/Player.tscn" id="2_r3cbp"]
 [ext_resource type="Material" uid="uid://b6dviv26cgjo6" path="res://Level/Resources/Ground/Ground078_1K-JPG.tres" id="3_i5eh5"]
+[ext_resource type="Script" uid="uid://nasx76nqy6gq" path="res://Assets/torch_light.gd" id="5_5noo7"]
 
 [sub_resource type="Environment" id="Environment_cyxyq"]
 background_mode = 2
@@ -43,3 +44,4 @@ light_energy = 2.371
 sky_mode = 1
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
+script = ExtResource("5_5noo7")

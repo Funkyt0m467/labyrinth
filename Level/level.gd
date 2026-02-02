@@ -1,6 +1,6 @@
 extends Node3D
 
-const WALL := preload("res://Level/Wall.tscn")
+const WALL := preload("res://Level/Wall/Wall.tscn")
 
 @export var width: int = 31
 @export var height: int = width

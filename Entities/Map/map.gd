@@ -38,7 +38,7 @@ func create_maze():
 func create_wall(_position:Vector2):
 	
 	var rect := TextureRect.new()
-	rect.texture = load("res://Assets/StoneWall/rock_wall_08_diff_1k.jpg")
+	rect.texture = load("res://Level/Wall/Resources/rock_wall_08_diff_1k.jpg")
 	rect.stretch_mode = TextureRect.STRETCH_SCALE
 	rect.expand = true
 	
@@ -51,7 +51,7 @@ func create_wall(_position:Vector2):
 func place_player():
 	
 	var rect := TextureRect.new()
-	rect.texture = load("res://Assets/StoneWall/rock_wall_08_diff_1k.jpg")
+	rect.texture = load("res://Level/Wall/Resources/rock_wall_08_diff_1k.jpg")
 	rect.stretch_mode = TextureRect.STRETCH_SCALE
 	rect.expand = true
 	
@@ -72,7 +72,7 @@ func place_player():
 func place_camera(pos: Vector2i):
 	
 	var rect := TextureRect.new()
-	rect.texture = load("res://Assets/StoneWall/rock_wall_08_diff_1k.jpg")
+	rect.texture = load("res://Level/Wall/Resources/rock_wall_08_diff_1k.jpg")
 	rect.stretch_mode = TextureRect.STRETCH_SCALE
 	rect.expand = true
 	
