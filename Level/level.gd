@@ -2,10 +2,17 @@ extends Node3D
 
 const WALL := preload("res://Level/Wall.tscn")
 
-var width: int = 31
-var height: int = width
+@export var width: int = 31
+@export var height: int = width
+
+@export var camera_count: int = 4
 
 var grid: Array = [] #2D grid of bools, wall = true, path = false
+var pathways: Array[Vector2i] = [] #Track the pathways, tiles without walls
+
+var cameras: Dictionary = {} #Stores the cameras with the key as position x+y of the camera (unique)
+var camera_positions: Array[Vector2i] = []
+
 var walls: Array[CSGBox3D] = [] #Array of boxes for each wall section
 var wall_size: Vector3
 
@@ -18,15 +25,15 @@ func _ready():
 		height+=1
 	
 	_generate_grid()
-	#print_grid()
-	
+	#_print_grid()
 	_generate_level()
+	_set_cameras()
 
 #Debug fonction to check how the var grid looks like
-func print_grid():
+func _print_grid():
 	var output := ""
 
-	for y in range(grid.size() - 1, -1, -1): #This way the start is at the bottom, end at the top
+	for y in grid.size():
 		for x in grid[y].size():
 			output += "██" if grid[y][x] else "  "
 		output += "\n"
@@ -35,7 +42,7 @@ func print_grid():
 
 func _generate_grid():
 	_init_grid()
-	_carve(Vector2i((width-1)>>1, height-2))
+	_carve(Vector2i((width-1)>>1, 1))
 	_create_entry_and_exit()
 
 func _init_grid():
@@ -48,7 +55,7 @@ func _init_grid():
 
 func _carve(cell: Vector2i):
 	
-	grid[cell.y][cell.x] = false
+	grid[cell.x][cell.y] = false
 
 	var directions: Array[Vector2i] = [
 		Vector2i(0, -2),
@@ -60,24 +67,33 @@ func _carve(cell: Vector2i):
 
 	for dir:Vector2i in directions:
 		var next:Vector2i = cell + dir
-		if next.x > 0 and next.x < width-1 and next.y > 0 and next.y < height-1 and grid[next.y][next.x]:
+		if next.x > 0 and next.x < width-1 and next.y > 0 and next.y < height-1 and grid[next.x][next.y]:
 			#Carve the wall between
 			var between:Vector2i = cell + dir/2
-			grid[between.y][between.x] = false
+			grid[between.x][between.y] = false
 			_carve(next)
 
 func _create_entry_and_exit():
 	var mid_x: int = (width-1)>>1
-	grid[height-1][mid_x] = false #Entry
-	grid[0][mid_x] = false #Exit
+	grid[0][mid_x] = false #Entry
+	grid[height-1][mid_x] = false #Exit
+
+func _set_cameras():
+	
+	pathways.shuffle() #Randomize the order oth the valid pathways
+	#TODO use a 2 stage sampling to make the shuffle more fair :
+	#1 create an even spread of the pathways
+	#2 take another pathway as emplacement aroung the anchor at random
+	camera_positions = pathways.slice(0, camera_count) #Select the first to be camera emplacement
+	
+	for pos in camera_positions:
+		_generate_camera(pos.x, pos.y)
 
 func _generate_level():
-	for z in grid.size():
-		for x in grid[z].size():
-			if grid[x][z]:
-				_generate_wall(x, z)
-			else:
-				pass #Here can be added any other spawned objects
+	for x in grid.size():
+		for y in grid[x].size():
+			if grid[y][x]: _generate_wall(x, y)
+			else: pathways.append(Vector2i(x, y))
 
 func _generate_wall(x:int, z:int):
 	
@@ -86,5 +102,16 @@ func _generate_wall(x:int, z:int):
 	
 	wall_size = wall.get_child(0).mesh.size
 	
-	wall.global_position.x = x * wall_size.x
-	wall.global_position.z = (z-((width-1)>>1)) * wall_size.z
+	wall.global_position.x = (x-((width-1)>>1)) * wall_size.x
+	wall.global_position.z = (z-(height-1)) * wall_size.z
+
+func _generate_camera(x:int, z:int):
+	var camera := Camera3D.new()
+	add_child(camera)
+	cameras[x+z] = camera
+	
+	camera.global_position.x = (x-((width-1)>>1)) * wall_size.x
+	camera.global_position.y = wall_size.y + 10 #10 above the wall to see a larger space
+	camera.global_position.z = (z-(height-1)) * wall_size.z
+	
+	camera.rotation_degrees.x = -90 #Look straight down on init

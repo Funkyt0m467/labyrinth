@@ -13,7 +13,9 @@ var map: Control
 
 var _speed: float = WALK_SPEED
 
-@onready var camera: Camera3D = $Camera3D
+@onready var level: Node = get_parent()
+@onready var player_camera: Camera3D = $Camera3D
+@onready var camera: Camera3D = player_camera
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
