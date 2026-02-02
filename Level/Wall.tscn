@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://diagpys03xl1f"]
 
-[ext_resource type="Texture2D" uid="uid://dordul342wk1m" path="res://Assets/StoneWall/rock_wall_08_diff_1k.jpg" id="1_15go4"]
-[ext_resource type="Texture2D" uid="uid://ebjqihrrausk" path="res://Assets/StoneWall/rock_wall_08_rough_1k.exr" id="2_eo1xn"]
-[ext_resource type="Texture2D" uid="uid://2s5ftetdqdh7" path="res://Assets/StoneWall/rock_wall_08_nor_gl_1k.png" id="2_rmvkh"]
+[ext_resource type="Texture2D" uid="uid://dordul342wk1m" path="res://Level/Resources/StoneWall/rock_wall_08_diff_1k.jpg" id="1_15go4"]
+[ext_resource type="Texture2D" uid="uid://ebjqihrrausk" path="res://Level/Resources/StoneWall/rock_wall_08_rough_1k.exr" id="2_eo1xn"]
+[ext_resource type="Texture2D" uid="uid://2s5ftetdqdh7" path="res://Level/Resources/StoneWall/rock_wall_08_nor_gl_1k.png" id="2_rmvkh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rmvkh"]
 albedo_texture = ExtResource("1_15go4")

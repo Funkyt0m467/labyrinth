@@ -93,3 +93,6 @@ func place_camera(pos: Vector2i):
 
 func _switch_camera(key: int):
 	cameras[key].make_current()
+	
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	self.queue_free()

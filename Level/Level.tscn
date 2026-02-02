@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://den388qr5y12s"]
 
 [ext_resource type="Script" uid="uid://itvqvjkpent2" path="res://Level/level.gd" id="1_a526m"]
-[ext_resource type="Sky" uid="uid://crmiiiy06tskn" path="res://Assets/Sky/NightSkyHDRI001_4K.tres" id="2_i5eh5"]
+[ext_resource type="Sky" uid="uid://crmiiiy06tskn" path="res://Level/Resources/Sky/NightSkyHDRI001_4K.tres" id="2_i5eh5"]
 [ext_resource type="PackedScene" uid="uid://ct2ra7hd6fbr7" path="res://Entities/Player/Player.tscn" id="2_r3cbp"]
-[ext_resource type="Material" uid="uid://b6dviv26cgjo6" path="res://Assets/Ground/Ground078_1K-JPG.tres" id="3_i5eh5"]
+[ext_resource type="Material" uid="uid://b6dviv26cgjo6" path="res://Level/Resources/Ground/Ground078_1K-JPG.tres" id="3_i5eh5"]
 
 [sub_resource type="Environment" id="Environment_cyxyq"]
 background_mode = 2
@@ -23,7 +23,6 @@ script = ExtResource("1_a526m")
 environment = SubResource("Environment_cyxyq")
 
 [node name="Player" parent="." instance=ExtResource("2_r3cbp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="Ground" type="CSGBox3D" parent="."]
 material_override = ExtResource("3_i5eh5")
@@ -39,5 +38,8 @@ size = Vector3(1000, 0.5, 1000)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.636671, 0.771136, 0, -0.771136, 0.636671, 0, 41.316, 0)
-light_color = Color(0.542537, 0.602022, 0.728363, 1)
+light_color = Color(0.0913495, 0.0432358, 0.510565, 1)
+light_energy = 2.371
 sky_mode = 1
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
