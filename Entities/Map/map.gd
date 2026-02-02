@@ -1,6 +1,9 @@
 extends Control
 
 var player_pos: Vector3
+var player_camera: Camera3D
+
+var in_camera: bool = false
 
 @onready var level: Node = get_parent()
 @onready var grid: Array = level.grid
@@ -21,8 +24,17 @@ func _ready() -> void:
 
 func _input(_event: InputEvent) -> void:
 	if _event.is_action_pressed("map"):
-		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-		self.queue_free()
+		if in_camera: #Going back to the player and the map
+			in_camera = false
+			
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			get_child(0).visible = true
+			
+			get_viewport().get_camera_3d().visible = false #Switching off the current camera
+			player_camera.make_current()
+		else:
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+			self.queue_free()
 
 func create_maze():
 	
@@ -92,7 +104,15 @@ func place_camera(pos: Vector2i):
 	get_child(0).add_child(button)
 
 func _switch_camera(key: int):
+	
+	await TransAnim.fade_out()
+	
 	cameras[key].make_current()
 	cameras[key].visible = true #This also toggle its child lighting
+	
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	self.queue_free()
+	
+	in_camera = true
+	get_child(0).visible = false #Hide the map while in camera
+	
+	await TransAnim.fade_in()

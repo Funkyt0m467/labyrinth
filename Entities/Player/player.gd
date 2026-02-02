@@ -32,6 +32,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		if Input.is_action_just_pressed("map"):
 			map = preload("res://Entities/Map/Map.tscn").instantiate()
 			map.player_pos = global_position
+			map.player_camera = player_camera
 			get_parent().add_child(map)
 		
 		#Camera mouvement
