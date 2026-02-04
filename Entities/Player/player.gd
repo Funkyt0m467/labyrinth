@@ -2,7 +2,6 @@ extends CharacterBody3D
 
 @export var WALK_SPEED: float = 5.0
 @export var SPRINT_SPEED: float = 10.0
-@export var JUMP_VELOCITY: float = 4.5
 
 @export var BASE_FOV: float = 75.0
 @export var FOV_CHANGE: float = 0.4

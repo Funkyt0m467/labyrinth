@@ -2,13 +2,13 @@ extends Node3D
 
 const WALL := preload("res://Level/Wall/Wall.tscn")
 
-@export var width: int = 31
-@export var height: int = width
+@export var width: int = 11
+@export var height: int = 11
 
 @export var camera_count: int = 4
 
 var grid: Array = [] #2D grid of bools, wall = true, path = false
-var pathways: Array[Vector2i] = [] #Track the pathways, tiles without walls
+var pathways: Array[Vector2i] = [] #Track the pathways, tiles without walls (used to place cameras, minotaur etc...)
 
 var cameras: Dictionary = {} #Stores the cameras with the key as position x+y of the camera (unique)
 var camera_positions: Array[Vector2i] = []
@@ -17,17 +17,20 @@ var walls: Array[CSGBox3D] = [] #Array of boxes for each wall section
 var wall_size: Vector3
 
 func _ready():
-	
-	#Guarranty width and height to be odd for outter walls
-	if width%2 == 0:
-		width+=1
-	if height%2 == 0:
-		height+=1
+	_check_size() #Verify maze has a valid size
 	
 	_generate_grid()
 	#_print_grid()
+	
 	_generate_level()
 	_set_cameras()
+	_spawn_minotaur()
+
+func _check_size():
+	if width%4!=3:
+		push_error("Width must be of the form 4k + 3")
+	if height%2!=1:
+		push_error("Height must be odd")
 
 #Debug fonction to check how the var grid looks like
 func _print_grid():
@@ -78,22 +81,15 @@ func _create_entry_and_exit():
 	grid[0][mid_x] = false #Entry
 	grid[height-1][mid_x] = false #Exit
 
-func _set_cameras():
-	
-	pathways.shuffle() #Randomize the order oth the valid pathways
-	#TODO use a 2 stage sampling to make the shuffle more fair :
-	#1 create an even spread of the pathways
-	#2 take another pathway as emplacement aroung the anchor at random
-	camera_positions = pathways.slice(0, camera_count) #Select the first to be camera emplacement
-	
-	for pos in camera_positions:
-		_generate_camera(pos.x, pos.y)
-
 func _generate_level():
 	for x in grid.size():
 		for y in grid[x].size():
+			var pos = Vector2i(x, y)
 			if grid[y][x]: _generate_wall(x, y)
-			else: pathways.append(Vector2i(x, y))
+			else:
+				var mid_x: int = (width-1)>>1
+				if pos != Vector2i(mid_x, 0) and pos != Vector2i(mid_x, height-1): #Not at the entry or exit
+					pathways.append(Vector2i(x, y))
 
 func _generate_wall(x:int, z:int):
 	
@@ -105,13 +101,24 @@ func _generate_wall(x:int, z:int):
 	wall.global_position.x = (x-((width-1)>>1)) * wall_size.x
 	wall.global_position.z = (z-(height-1)) * wall_size.z
 
+func _set_cameras():
+	
+	pathways.shuffle() #Randomize the order oth the valid pathways
+	#TODO use a 2 stage sampling to make the shuffle more fair :
+	#1 create an even spread of the pathways
+	#2 take another pathway as emplacement aroung the anchor at random
+	camera_positions = pathways.slice(0, camera_count) #Select the first to be camera emplacement
+	
+	for pos in camera_positions:
+		_generate_camera(pos.x, pos.y)
+
 func _generate_camera(x:int, z:int):
 	var camera := Camera3D.new()
 	%Cameras.add_child(camera)
 	cameras[x+z] = camera
 	
 	camera.global_position.x = (x-((width-1)>>1)) * wall_size.x
-	camera.global_position.y = wall_size.y + 10 #10 above the wall to see a larger space
+	camera.global_position.y = wall_size.y + 15 #10 above the wall to see a larger space
 	camera.global_position.z = (z-(height-1)) * wall_size.z
 	
 	camera.rotation_degrees.x = -90 #Look straight down on init
@@ -120,3 +127,15 @@ func _generate_camera(x:int, z:int):
 	camera.add_child(light)
 	
 	camera.visible = false
+
+func _spawn_minotaur():
+	
+	var minotaur: CharacterBody3D = %Minotaur
+	
+	#TODO put the minotaur in the middle maybe ?
+	#Sets the minotaur in a pathway that's not the same as a camera one (the first pathways)
+	minotaur.global_position.x = (pathways[camera_count+1].x-((width-1)>>1)) * wall_size.x
+	minotaur.global_position.y = 0
+	minotaur.global_position.z = (pathways[camera_count+1].y-(height-1)) * wall_size.z
+	
+	minotaur.visible = true
