@@ -139,3 +139,8 @@ func _spawn_minotaur():
 	minotaur.global_position.z = (pathways[camera_count+1].y-(height-1)) * wall_size.z
 	
 	minotaur.visible = true
+	
+	minotaur.grid = grid #Passing the grid for pathfinding
+	#minotaur.grid_minotaur_pos = pathways[camera_count+1]
+	minotaur.grid_size = Vector2i(width, height)
+	minotaur.wall_size = wall_size

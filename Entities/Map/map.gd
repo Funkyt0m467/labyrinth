@@ -1,5 +1,6 @@
 extends Control
 
+var player: CharacterBody3D
 var player_pos: Vector3
 var player_camera: Camera3D
 
@@ -8,14 +9,17 @@ var in_transition: bool = false
 
 @onready var level: Node = get_parent()
 @onready var grid: Array = level.grid
+
 @onready var cameras: Dictionary = level.cameras
 @onready var camera_positions: Array[Vector2i] = level.camera_positions
+
 @onready var maze_size: Vector2i = Vector2i(level.width, level.height)
 @onready var wall_size: Vector3 = level.wall_size
 @onready var map_wall_size: Vector2 = Vector2(int(300.0/maze_size.x), int(300.0/maze_size.y)) #Size of the 2D wall on the map
 @onready var maze_pos: Vector2 = %MazePosition.position #Place the position of the maze on the map using marker
 
 func _ready() -> void:
+	
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	
 	create_maze()
@@ -34,6 +38,7 @@ func _input(_event: InputEvent) -> void:
 			get_viewport().get_camera_3d().visible = false #Switching off the current camera
 			player_camera.make_current()
 		else: #closing the map
+			player.in_map_or_camera = false
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 			self.queue_free()
 

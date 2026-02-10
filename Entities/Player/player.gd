@@ -9,12 +9,15 @@ extends CharacterBody3D
 var sensitivity: float = 0.005
 
 var map: Control
+var in_map_or_camera: bool
 
 var _speed: float = WALK_SPEED
 
 @onready var level: Node = get_parent()
 @onready var player_camera: Camera3D = $Camera3D
 @onready var camera: Camera3D = player_camera
+
+@onready var minotaur: CharacterBody3D = get_tree().get_nodes_in_group("minotaur")[0]
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -29,7 +32,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	if(!map): #open map or look around only when map isn't opened
 	
 		if Input.is_action_just_pressed("map"):
+			minotaur.set_target() #Set the minotaur's target to player
+			in_map_or_camera = true #While true the minotaur can move
 			map = preload("res://Entities/Map/Map.tscn").instantiate()
+			map.player = self
 			map.player_pos = global_position
 			map.player_camera = player_camera
 			get_parent().add_child(map)

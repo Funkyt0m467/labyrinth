@@ -1,7 +1,7 @@
 class_name Menu extends Control
 
 func _ready() -> void:
-	pass
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _on_play_button_down() -> void:
 	switch_scene("res://Level/Level.tscn")
