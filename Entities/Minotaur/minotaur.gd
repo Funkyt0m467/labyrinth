@@ -2,27 +2,27 @@ extends CharacterBody3D
 
 const SPEED = 5.0
 
+@export var min_distance: float = 4
+
 var grid: Array
 var grid_size: Vector2i #Is (Width, height) of the grid
 var wall_size: Vector3
 
+var routines: Array[Vector2i]
 var targets: Array
 
 @onready var player: CharacterBody3D = get_tree().get_nodes_in_group("player")[0]
 @onready var agent: NavigationAgent3D = $NavigationAgent3D
+@onready var sight: RayCast3D = $RayCast3D
 
 func _physics_process(_delta: float) -> void:
 	
-	if agent.target_position and agent.is_navigation_finished():
-		
-		#print(targets)
-		targets.pop_front() #Remove the reached target on the list
-		
-		#if targets.size() <= 3: #This means minautor is at 3 tile from the player
-			#Should play a sound
-		if targets.size() > 1:
-			agent.target_position = _get_pos(targets[0]) #Target the next one now in first
-		else: game_over() 
+	if _in_sight():
+		chase()
+	elif player.in_map_or_camera and targets:
+		go_to_player()
+	else:
+		routine()
 	
 	var direction := (agent.get_next_path_position() - global_position).normalized()
 	if direction:
@@ -30,18 +30,53 @@ func _physics_process(_delta: float) -> void:
 	else:
 		velocity = Vector3.ZERO
 
-	if player.in_map_or_camera: move_and_slide()
+	move_and_slide()
 
 func set_target(): #Set by the player on entering the map
+	
 	targets = _astar(_entity_grid_pos(self), _entity_grid_pos(player))
-	if targets.size() <= 1: game_over()
+	
 	targets.pop_front() #First pos is it's own so remove it
-	agent.target_position = _get_pos(targets[0]) #First target
+	if targets: agent.target_position = _get_pos(targets[0]) #First target if any left
+	else: return
 	
 	print("Minotaur's position = ")
 	print(_entity_grid_pos(self))
 	print("Target grid position = ")
 	print(targets[0])
+
+func chase():
+	agent.target_position = player.global_position
+	if agent.distance_to_target() <= min_distance:
+		game_over()
+
+func go_to_player():
+	
+	if agent.is_navigation_finished():
+		
+		print(targets)
+		targets.pop_front() #Remove the reached target on the list
+		
+		#if targets.size() <= 3: #This means minautor is at 3 tile from the player
+			#Should play a sound
+		if targets.size() > 1: #When less it should be next to the player and see it
+			agent.target_position = _get_pos(targets[0]) #Target the next one now in first
+
+func routine():
+	if routines: agent.target_position = _get_pos(routines[0])
+
+func _in_sight():
+	#Squared lenght is used to be less expensive, max distance can be larger but should be at least level sized
+	var max_dist: float = grid_size.length_squared()*wall_size.length_squared()
+	
+	sight.target_position = max_dist*(player.global_position - global_position).normalized()
+	sight.force_raycast_update()
+	
+	if sight.is_colliding() and sight.get_collider() == player:
+		print("PLAYER SEEN!")
+		return true
+	
+	return false
 
 func _entity_grid_pos(entity: CharacterBody3D) -> Vector2i:
 	var grid_pos: Vector2i
