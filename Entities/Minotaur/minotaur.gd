@@ -15,6 +15,9 @@ var targets: Array
 @onready var agent: NavigationAgent3D = $NavigationAgent3D
 @onready var sight: RayCast3D = $RayCast3D
 
+#TODO Routine (path around the spawn = middle, cyclic)
+#TODO make him faster (might be stuck on walls sometimes ?)
+
 func _physics_process(_delta: float) -> void:
 	
 	if _in_sight():
@@ -54,7 +57,7 @@ func go_to_player():
 	
 	if agent.is_navigation_finished():
 		
-		print(targets)
+		print(targets.size())
 		targets.pop_front() #Remove the reached target on the list
 		
 		#if targets.size() <= 3: #This means minautor is at 3 tile from the player
@@ -65,6 +68,7 @@ func go_to_player():
 func routine():
 	if routines: agent.target_position = _get_pos(routines[0])
 
+#BUG sometimes see the player when not in sight ?
 func _in_sight():
 	#Squared lenght is used to be less expensive, max distance can be larger but should be at least level sized
 	var max_dist: float = grid_size.length_squared()*wall_size.length_squared()

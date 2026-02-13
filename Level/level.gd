@@ -2,10 +2,10 @@ extends Node3D
 
 const WALL := preload("res://Level/Wall/Wall.tscn")
 
-@export var width: int = 11
-@export var height: int = 11
+@export var width: int = 47 #Should be of the from 4k+3
+@export var height: int = 47 #Should be odd
 
-@export var camera_count: int = 4
+@export var camera_count: int = 16 #Should be of the form n²
 
 var grid: Array = [] #2D grid of bools, wall = true, path = false
 var pathways: Array[Vector2i] = [] #Track the pathways, tiles without walls (used to place cameras, minotaur etc...)
@@ -58,7 +58,7 @@ func _init_grid():
 
 func _carve(cell: Vector2i):
 	
-	grid[cell.x][cell.y] = false
+	grid[cell.y][cell.x] = false
 
 	var directions: Array[Vector2i] = [
 		Vector2i(0, -2),
@@ -70,10 +70,10 @@ func _carve(cell: Vector2i):
 
 	for dir:Vector2i in directions:
 		var next:Vector2i = cell + dir
-		if next.x > 0 and next.x < width-1 and next.y > 0 and next.y < height-1 and grid[next.x][next.y]:
+		if next.x > 0 and next.x < width-1 and next.y > 0 and next.y < height-1 and grid[next.y][next.x]:
 			#Carve the wall between
 			var between:Vector2i = cell + dir/2
-			grid[between.x][between.y] = false
+			grid[between.y][between.x] = false
 			_carve(next)
 
 func _create_entry_and_exit():
@@ -82,8 +82,8 @@ func _create_entry_and_exit():
 	grid[height-1][mid_x] = false #Exit
 
 func _generate_level():
-	for x in grid.size():
-		for y in grid[x].size():
+	for y in grid.size():
+		for x in grid[y].size():
 			var pos = Vector2i(x, y)
 			if grid[y][x]: _generate_wall(x, y)
 			else:
@@ -103,11 +103,44 @@ func _generate_wall(x:int, z:int):
 
 func _set_cameras():
 	
-	pathways.shuffle() #Randomize the order oth the valid pathways
-	#TODO use a 2 stage sampling to make the shuffle more fair :
-	#1 create an even spread of the pathways
-	#2 take another pathway as emplacement aroung the anchor at random
-	camera_positions = pathways.slice(0, camera_count) #Select the first to be camera emplacement
+	#TODO Fix this because it only works for :
+	#maze size 11,11 or 11,31 camera_count 1 or 4 not 16
+	#maze size 31,31 or 31,11 camera count 1 or 4 or 16
+	#Seems like weight need to be almost twice camera_count (not height ?)
+	
+	var sections: Array  #Array of the section, each are Array[Vector2i] storing all pos of paths in it
+	for n in camera_count: #There is a section for each camera
+		var section: Array[Vector2i] = []
+		sections.append(section)
+	
+	var section_size: Vector2i
+	var nbr_of_sections: int = int(sqrt(camera_count))
+	
+	#With this division the size should exclude the 2 outter walls and the center row/line
+	@warning_ignore("integer_division")
+	section_size.x = int((width-3) / nbr_of_sections)
+	@warning_ignore("integer_division")
+	section_size.y = int((height-3) / nbr_of_sections)
+	
+	for i in pathways.size():
+		
+		#Leaves the middle parts because camaera_count is even and maze sizes are even
+		if pathways[i].x == (width-1)>>1 or pathways[i].y == (height-1)>>1:
+			continue
+		
+		@warning_ignore("integer_division")
+		var x = int((pathways[i].x-2)/section_size.x)
+		@warning_ignore("integer_division")
+		var y = int((pathways[i].y-2)/section_size.y)
+		
+		var n = y*nbr_of_sections + x
+		
+		sections[n].append(pathways[i])
+	
+	for n in camera_count:
+		
+		sections[n].shuffle()
+		camera_positions.append(sections[n][0])
 	
 	for pos in camera_positions:
 		_generate_camera(pos.x, pos.y)
@@ -134,13 +167,12 @@ func _spawn_minotaur():
 	
 	#TODO put the minotaur in the middle maybe ?
 	#Sets the minotaur in a pathway that's not the same as a camera one (the first pathways)
-	minotaur.global_position.x = (pathways[camera_count+1].x-((width-1)>>1)) * wall_size.x
+	minotaur.global_position.x = 0
 	minotaur.global_position.y = 0
-	minotaur.global_position.z = (pathways[camera_count+1].y-(height-1)) * wall_size.z
+	minotaur.global_position.z = -((height-1)>>1) * wall_size.z
 	
 	minotaur.visible = true
 	
 	minotaur.grid = grid #Passing the grid for pathfinding
-	#minotaur.grid_minotaur_pos = pathways[camera_count+1]
 	minotaur.grid_size = Vector2i(width, height)
 	minotaur.wall_size = wall_size
