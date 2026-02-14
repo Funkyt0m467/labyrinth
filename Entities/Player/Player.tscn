@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://ct2ra7hd6fbr7"]
+[gd_scene load_steps=5 format=3 uid="uid://ct2ra7hd6fbr7"]
 
 [ext_resource type="Script" uid="uid://dogtnb8j3fgiw" path="res://Entities/Player/player.gd" id="1_tcnsb"]
 [ext_resource type="Script" uid="uid://nasx76nqy6gq" path="res://Entities/Light/torch_light.gd" id="2_1iada"]
+[ext_resource type="Theme" uid="uid://csif2xx86853p" path="res://Menu/Resources/menu_theme.tres" id="3_vweq0"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gb1tc"]
 
@@ -28,3 +29,16 @@ omni_attenuation = 1.6
 script = ExtResource("2_1iada")
 range_variation = 15.0
 energy_variation = 15.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Chrono" type="Label" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
+pivot_offset = Vector2(32.5, 0)
+theme = ExtResource("3_vweq0")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true

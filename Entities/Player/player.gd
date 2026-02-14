@@ -17,10 +17,15 @@ var _speed: float = WALK_SPEED
 @onready var player_camera: Camera3D = $Camera3D
 @onready var camera: Camera3D = player_camera
 
+@onready var chrono: Label = $CanvasLayer/Chrono
+@onready var timer: Timer = $Timer
+
 @onready var minotaur: CharacterBody3D = get_tree().get_nodes_in_group("minotaur")[0]
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	
+	_set_timer()
 
 func _unhandled_input(event: InputEvent) -> void:
 	
@@ -48,6 +53,8 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _physics_process(delta: float) -> void:
 	
+	_set_chrono_text()
+	
 	if(map):
 		_speed = 0 #Stop when map opened
 	elif Input.is_action_pressed("sprint"):
@@ -71,3 +78,29 @@ func _physics_process(delta: float) -> void:
 	camera.fov = lerp(camera.fov, target_fov, delta * 8.0)
 	
 	if(!map): move_and_slide()
+
+func _set_timer():
+	
+	timer.wait_time = level.time
+	timer.timeout.connect(times_up)
+	timer.start()
+
+func _set_chrono_text():
+	
+	var timer_text: String
+	var timer_time: float = timer.time_left+1 #Starts at 1 and not 0
+	
+	if int(timer_time/60)>0:
+		timer_text = str(int(timer_time/60)) + ":"
+		if int(timer_time)%60<10: timer_text += "0"
+	timer_text += str(int(timer_time)%60)
+	
+	if timer_time<10:
+		chrono.add_theme_color_override("font_color", Color.RED)
+		chrono.scale = Vector2(2,2)
+		chrono.add_theme_font_size_override("font_size", 51)
+		
+	chrono.text = timer_text
+
+func times_up():
+	minotaur.game_over() #TODO Should trigger the race instead once this is done

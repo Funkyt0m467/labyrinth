@@ -7,6 +7,8 @@ const WALL := preload("res://Level/Wall/Wall.tscn")
 
 @export var camera_count: int = 16 #Should be of the form n²
 
+@export var time: int = 300 #Time to complete the maze
+
 var grid: Array = [] #2D grid of bools, wall = true, path = false
 var pathways: Array[Vector2i] = [] #Track the pathways, tiles without walls (used to place cameras, minotaur etc...)
 
