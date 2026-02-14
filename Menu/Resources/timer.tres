@@ -1,0 +1,28 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://brlu10tkpo80g"]
+
+[ext_resource type="FontFile" uid="uid://c3wxt0l7d1bx3" path="res://Assets/Font/default.ttf" id="1_8cby4"]
+[ext_resource type="StyleBox" uid="uid://ckudo8k4i2lot" path="res://Menu/Resources/main_menu.tres" id="2_fqx3u"]
+[ext_resource type="StyleBox" uid="uid://ch3k528jq2gxj" path="res://Menu/Resources/main_menu_focus.tres" id="3_a8c8t"]
+[ext_resource type="StyleBox" uid="uid://css6lagqrsdam" path="res://Menu/Resources/main_menu_hover.tres" id="4_e0dh4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gj4w4"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[resource]
+default_font_size = 26
+Button/font_sizes/font_size = 48
+Button/fonts/font = ExtResource("1_8cby4")
+Button/styles/disabled = ExtResource("2_fqx3u")
+Button/styles/focus = ExtResource("3_a8c8t")
+Button/styles/hover = ExtResource("4_e0dh4")
+Button/styles/hover_pressed = ExtResource("4_e0dh4")
+Button/styles/normal = ExtResource("2_fqx3u")
+Button/styles/pressed = ExtResource("2_fqx3u")
+Label/constants/line_spacing = 0
+Label/constants/shadow_offset_x = 0
+Label/constants/shadow_offset_y = 0
+Label/constants/shadow_outline_size = 0
+Label/font_sizes/font_size = 26
+Label/fonts/font = ExtResource("1_8cby4")
+Label/styles/normal = SubResource("StyleBoxFlat_gj4w4")
+VBoxContainer/constants/separation = 16

@@ -2,8 +2,8 @@ extends Node3D
 
 const WALL := preload("res://Level/Wall/Wall.tscn")
 
-@export var width: int = 47 #Should be of the from 4k+3
-@export var height: int = 47 #Should be odd
+@export var width: int = 31 #Should be of the from 4k+3
+@export var height: int = 31 #Should be odd
 
 @export var camera_count: int = 16 #Should be of the form n²
 
@@ -105,39 +105,25 @@ func _generate_wall(x:int, z:int):
 
 func _set_cameras():
 	
-	#TODO Fix this because it only works for :
-	#maze size 11,11 or 11,31 camera_count 1 or 4 not 16
-	#maze size 31,31 or 31,11 camera count 1 or 4 or 16
-	#Seems like weight need to be almost twice camera_count (not height ?)
-	
 	var sections: Array  #Array of the section, each are Array[Vector2i] storing all pos of paths in it
 	for n in camera_count: #There is a section for each camera
 		var section: Array[Vector2i] = []
 		sections.append(section)
 	
-	var section_size: Vector2i
-	var nbr_of_sections: int = int(sqrt(camera_count))
+	var nbr_of_sections: Vector2i = _closest_ratio_pair(camera_count, width, height)
+	var section_size: Vector2 = Vector2i(width, height)/nbr_of_sections
 	
-	#With this division the size should exclude the 2 outter walls and the center row/line
-	@warning_ignore("integer_division")
-	section_size.x = int((width-3) / nbr_of_sections)
-	@warning_ignore("integer_division")
-	section_size.y = int((height-3) / nbr_of_sections)
+	var sections_center: Array[Vector2] = []
+	var offset: Vector2 = (Vector2(width, height)-(Vector2(nbr_of_sections)-Vector2(1, 1))*section_size)/2
+	for y in nbr_of_sections.y:
+		for x in nbr_of_sections.x:
+			sections_center.append(Vector2(x, y) * section_size + offset)
 	
 	for i in pathways.size():
-		
-		#Leaves the middle parts because camaera_count is even and maze sizes are even
-		if pathways[i].x == (width-1)>>1 or pathways[i].y == (height-1)>>1:
-			continue
-		
-		@warning_ignore("integer_division")
-		var x = int((pathways[i].x-2)/section_size.x)
-		@warning_ignore("integer_division")
-		var y = int((pathways[i].y-2)/section_size.y)
-		
-		var n = y*nbr_of_sections + x
-		
-		sections[n].append(pathways[i])
+		for n in sections_center.size():
+			if _scaled_chebyshev_distance(section_size, pathways[i], sections_center[n]) <= 1:
+				sections[n].append(pathways[i])
+				continue
 	
 	for n in camera_count:
 		
@@ -146,6 +132,32 @@ func _set_cameras():
 	
 	for pos in camera_positions:
 		_generate_camera(pos.x, pos.y)
+
+func _closest_ratio_pair(n: int, _width: float, _height: float) -> Vector2i:
+	
+	var target: float = _width/_height
+	var best_pair: Vector2i = Vector2i(n, 1)
+	var best_diff: float = INF
+
+	for i in range(1, int(sqrt(float(n))) + 1):
+		if n%i == 0:
+			var x: int = i
+			@warning_ignore("integer_division")
+			var y: int = int(n/i)
+
+			var ratio: float = float(x) / float(y)
+			var diff: float = abs(ratio - target)
+
+			if diff < best_diff:
+				best_diff = diff
+				best_pair = Vector2i(x, y)
+	
+	return best_pair
+
+func _scaled_chebyshev_distance(rect_size: Vector2, a: Vector2, b: Vector2) -> float:
+	var x: float = 2*abs(b.x-a.x)/rect_size.x
+	var y: float = 2*abs(b.y-a.y)/rect_size.y
+	return max(x, y)
 
 func _generate_camera(x:int, z:int):
 	var camera := Camera3D.new()

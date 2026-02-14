@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-const SPEED = 15.0
+const SPEED = 20.0
 
 @export var min_distance: float = 4
 
@@ -18,7 +18,6 @@ var in_transition: bool = false
 @onready var sight: RayCast3D = $RayCast3D
 
 #TODO Routine (path around the spawn = middle, cyclic)
-#TODO make him faster (might be stuck on walls sometimes ?)
 
 func _physics_process(_delta: float) -> void:
 	
@@ -31,6 +30,9 @@ func _physics_process(_delta: float) -> void:
 	
 	var direction := (agent.get_next_path_position() - global_position).normalized()
 	if direction:
+		#TODO For less robotic mouv consider using
+		#velocity.move_toward(direction * SPEED, turn sharpness between 0-1 (1=sharp))
+		#But only when velocity isn't too hight or not in corners
 		velocity = direction * SPEED
 	else:
 		velocity = Vector3.ZERO

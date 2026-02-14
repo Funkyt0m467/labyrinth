@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dogtnb8j3fgiw" path="res://Entities/Player/player.gd" id="1_tcnsb"]
 [ext_resource type="Script" uid="uid://nasx76nqy6gq" path="res://Entities/Light/torch_light.gd" id="2_1iada"]
-[ext_resource type="Theme" uid="uid://csif2xx86853p" path="res://Menu/Resources/menu_theme.tres" id="3_vweq0"]
+[ext_resource type="Theme" uid="uid://brlu10tkpo80g" path="res://Menu/Resources/timer.tres" id="3_vweq0"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gb1tc"]
 
@@ -33,7 +33,7 @@ energy_variation = 15.0
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Chrono" type="Label" parent="CanvasLayer"]
-anchors_preset = -1
+anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 grow_horizontal = 2

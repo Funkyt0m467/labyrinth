@@ -41,6 +41,7 @@ environment = SubResource("Environment_cyxyq")
 
 [node name="DebugLight" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.118751, 0.992924, 0, -0.992924, 0.118751, 0, 5.60109, 0)
+visible = false
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_i5eh5")
