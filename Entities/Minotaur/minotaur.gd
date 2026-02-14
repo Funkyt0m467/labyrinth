@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-const SPEED = 5.0
+const SPEED = 15.0
 
 @export var min_distance: float = 4
 
@@ -10,6 +10,8 @@ var wall_size: Vector3
 
 var routines: Array[Vector2i]
 var targets: Array
+
+var in_transition: bool = false
 
 @onready var player: CharacterBody3D = get_tree().get_nodes_in_group("player")[0]
 @onready var agent: NavigationAgent3D = $NavigationAgent3D
@@ -29,7 +31,7 @@ func _physics_process(_delta: float) -> void:
 	
 	var direction := (agent.get_next_path_position() - global_position).normalized()
 	if direction:
-		velocity = velocity.move_toward(direction * SPEED, 0.25)
+		velocity = direction * SPEED
 	else:
 		velocity = Vector3.ZERO
 
@@ -144,6 +146,10 @@ func _astar(start: Vector2i, goal: Vector2i) -> Array:
 	return []
 
 func game_over() -> void: #TODO Game over screen
+	
+	if in_transition: return
+	
+	in_transition = true
 	
 	print("Game over")
 	
