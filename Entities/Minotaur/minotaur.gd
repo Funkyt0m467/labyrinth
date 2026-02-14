@@ -3,12 +3,17 @@ extends CharacterBody3D
 const SPEED = 20.0
 
 @export var min_distance: float = 4
+@export var nbr_of_routine_point = 2
 
 var grid: Array
 var grid_size: Vector2i #Is (Width, height) of the grid
 var wall_size: Vector3
 
 var routines: Array[Vector2i]
+var routine_targets: Array
+var current_routine_index: int = 0
+var index_dir: int = 1
+
 var targets: Array
 
 var in_transition: bool = false
@@ -17,15 +22,13 @@ var in_transition: bool = false
 @onready var agent: NavigationAgent3D = $NavigationAgent3D
 @onready var sight: RayCast3D = $RayCast3D
 
-#TODO Routine (path around the spawn = middle, cyclic)
-
 func _physics_process(_delta: float) -> void:
 	
 	if _in_sight():
 		chase()
 	elif player.in_map_or_camera and targets:
 		go_to_player()
-	else:
+	else: #TODO needs to be able to go back to routine point after going to player
 		routine()
 	
 	var direction := (agent.get_next_path_position() - global_position).normalized()
@@ -39,12 +42,19 @@ func _physics_process(_delta: float) -> void:
 
 	move_and_slide()
 
+func set_routine():
+	for i in routines.size()-1:
+		routine_targets += _astar(routines[i], routines[i+1]) #Creates all the paths between routines
+		if i<routines.size()-1:
+			routine_targets.pop_back()
+	print(routine_targets.size())
+
 func set_target(): #Set by the player on entering the map
 	
 	targets = _astar(_entity_grid_pos(self), _entity_grid_pos(player))
 	
 	targets.pop_front() #First pos is it's own so remove it
-	if targets: agent.target_position = _get_pos(targets[0]) #First target if any left
+	if targets: agent.target_position = get_pos(targets[0]) #First target if any left
 	else: return
 	
 	print("Minotaur's position = ")
@@ -67,10 +77,23 @@ func go_to_player():
 		#if targets.size() <= 3: #This means minautor is at 3 tile from the player
 			#Should play a sound
 		if targets.size() > 1: #When less it should be next to the player and see it
-			agent.target_position = _get_pos(targets[0]) #Target the next one now in first
+			agent.target_position = get_pos(targets[0]) #Target the next one now in first
 
 func routine():
-	if routines: agent.target_position = _get_pos(routines[0])
+	
+	if agent.is_navigation_finished() and routine_targets:
+		
+		current_routine_index += index_dir
+		
+		if current_routine_index >= routine_targets.size()-1:
+			current_routine_index = routine_targets.size()-1
+			index_dir = -1
+		elif current_routine_index <= 0:
+			current_routine_index = 0
+			index_dir = 1
+		
+		print("Reached routine ", current_routine_index, " at pos ", routine_targets[current_routine_index])
+		agent.target_position = get_pos(routine_targets[current_routine_index])
 
 #BUG sometimes see the player when not in sight ?
 func _in_sight():
@@ -92,7 +115,7 @@ func _entity_grid_pos(entity: CharacterBody3D) -> Vector2i:
 	grid_pos.y = floor(entity.global_position.z/wall_size.z+0.5) + (grid_size.y-1)
 	return grid_pos
 
-func _get_pos(grid_pos: Vector2i) -> Vector3:
+func get_pos(grid_pos: Vector2i) -> Vector3:
 	
 	var pos: Vector3
 	

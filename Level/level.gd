@@ -2,10 +2,10 @@ extends Node3D
 
 const WALL := preload("res://Level/Wall/Wall.tscn")
 
-@export var width: int = 31 #Should be of the from 4k+3
-@export var height: int = 31 #Should be odd
+@export var width: int = 11 #Should be of the from 4k+3
+@export var height: int = 11 #Should be odd
 
-@export var camera_count: int = 16 #Should be of the form n²
+@export var camera_count: int = 4
 
 @export var time: int = 300 #Time to complete the maze
 
@@ -26,7 +26,7 @@ func _ready():
 	
 	_generate_level()
 	_set_cameras()
-	_spawn_minotaur()
+	_set_minotaur()
 
 func _check_size():
 	if width%4!=3:
@@ -119,10 +119,10 @@ func _set_cameras():
 		for x in nbr_of_sections.x:
 			sections_center.append(Vector2(x, y) * section_size + offset)
 	
-	for i in pathways.size():
+	for path in pathways:
 		for n in sections_center.size():
-			if _scaled_chebyshev_distance(section_size, pathways[i], sections_center[n]) <= 1:
-				sections[n].append(pathways[i])
+			if _scaled_chebyshev_distance(path, sections_center[n], section_size) <= 1:
+				sections[n].append(path)
 				continue
 	
 	for n in camera_count:
@@ -154,7 +154,7 @@ func _closest_ratio_pair(n: int, _width: float, _height: float) -> Vector2i:
 	
 	return best_pair
 
-func _scaled_chebyshev_distance(rect_size: Vector2, a: Vector2, b: Vector2) -> float:
+func _scaled_chebyshev_distance(a: Vector2, b: Vector2, rect_size: Vector2 = Vector2(1, 1)) -> float:
 	var x: float = 2*abs(b.x-a.x)/rect_size.x
 	var y: float = 2*abs(b.y-a.y)/rect_size.y
 	return max(x, y)
@@ -175,18 +175,24 @@ func _generate_camera(x:int, z:int):
 	
 	camera.visible = false
 
-func _spawn_minotaur():
+func _set_minotaur():
 	
 	var minotaur: CharacterBody3D = %Minotaur
-	
-	#TODO put the minotaur in the middle maybe ?
-	#Sets the minotaur in a pathway that's not the same as a camera one (the first pathways)
-	minotaur.global_position.x = 0
-	minotaur.global_position.y = 0
-	minotaur.global_position.z = -((height-1)>>1) * wall_size.z
 	
 	minotaur.visible = true
 	
 	minotaur.grid = grid #Passing the grid for pathfinding
 	minotaur.grid_size = Vector2i(width, height)
 	minotaur.wall_size = wall_size
+	
+	var center_section: Array[Vector2i]
+	var center: Vector2 = Vector2(float(width-1)/2, float(height-1)/2)
+	for path in pathways:
+		if _scaled_chebyshev_distance(path, center, center) <= 1:
+			center_section.append(path)
+	center_section.shuffle()
+	
+	minotaur.routines = center_section.slice(0, minotaur.nbr_of_routine_point)
+	minotaur.set_routine()
+	
+	minotaur.global_position = minotaur.get_pos(center_section[0])
